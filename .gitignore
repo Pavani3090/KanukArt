@@ -1,0 +1,17 @@
+# React
+frontend/node_modules/
+frontend/dist/
+
+# Spring Boot
+backend/target/
+
+# Eclipse
+.metadata/
+**/.metadata/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log

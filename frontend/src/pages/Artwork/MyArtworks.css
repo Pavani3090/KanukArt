@@ -1,0 +1,78 @@
+.my-artworks{
+  padding:40px;
+  background:#f8f8fc;
+  min-height:100vh;
+}
+
+.my-artworks h1{
+  text-align:center;
+  color:#5a189a;
+  margin-bottom:40px;
+}
+
+.artwork-grid{
+  display:grid;
+  grid-template-columns:
+  repeat(auto-fit,minmax(300px,1fr));
+  gap:25px;
+}
+
+.artwork-card{
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.artwork-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.artwork-content{
+  padding:20px;
+}
+
+.category{
+  display:inline-block;
+  background:#eee;
+  padding:5px 12px;
+  border-radius:20px;
+  margin:10px 0;
+}
+
+.artwork-content p{
+  color:#666;
+}
+
+.artwork-content h4{
+  color:#5a189a;
+  margin-top:15px;
+}
+
+.action-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.edit-btn{
+  flex:1;
+  padding:10px;
+  border:none;
+  background:#5a189a;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.delete-btn{
+  flex:1;
+  padding:10px;
+  border:none;
+  background:#dc3545;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
