@@ -18,6 +18,24 @@ function Navbar() {
     navigate("/");
   };
 
+  const getHomeRoute = () => {
+    if (!user) return "/";
+
+    switch (user.role) {
+      case "CUSTOMER":
+        return "/dashboard";
+
+      case "ARTIST":
+        return "/artist-dashboard";
+
+      case "ADMIN":
+        return "/admin-dashboard";
+
+      default:
+        return "/";
+    }
+  };
+
   return (
     <nav
       style={{
@@ -27,172 +45,325 @@ function Navbar() {
         padding: "15px 40px",
         background: "#6a11cb",
         color: "white",
+        position: "sticky",
+        top: 0,
+        zIndex: 1000,
       }}
     >
       {/* Logo */}
+
       <div
-        className="logo"
+        onClick={() => navigate(getHomeRoute())}
         style={{
-          fontSize: "28px",
+          fontSize: "32px",
           fontWeight: "bold",
           cursor: "pointer",
         }}
-        onClick={() =>
-          navigate(
-            user?.role === "CUSTOMER"
-              ? "/dashboard"
-              : user?.role === "ARTIST"
-                ? "/artist-dashboard"
-                : user?.role === "ADMIN"
-                  ? "/admin-dashboard"
-                  : "/",
-          )
-        }
       >
-        Kanuk<span style={{ color: "#ffd700" }}>Art</span>
+        Kanuk
+        <span
+          style={{
+            color: "#FFD700",
+          }}
+        >
+          Art
+        </span>
       </div>
 
       {/* Navigation */}
+
       <ul
         style={{
           display: "flex",
-          gap: "25px",
+          gap: "30px",
           listStyle: "none",
+          margin: 0,
+          padding: 0,
         }}
       >
         <li>
           <Link
-            to={
-              user?.role === "CUSTOMER"
-                ? "/dashboard"
-                : user?.role === "ARTIST"
-                  ? "/artist-dashboard"
-                  : user?.role === "ADMIN"
-                    ? "/admin-dashboard"
-                    : "/"
-            }
+            to={getHomeRoute()}
+            style={linkStyle}
           >
             Home
           </Link>
         </li>
 
         <li>
-          <Link to="/categories" style={{ color: "white" }}>
+          <Link
+            to="/categories"
+            style={linkStyle}
+          >
             Categories
           </Link>
         </li>
 
         <li>
-          <Link to="/shop" style={{ color: "white" }}>
+          <Link
+            to="/shop"
+            style={linkStyle}
+          >
             Shop
           </Link>
         </li>
 
         <li>
-          <Link to="/about" style={{ color: "white" }}>
+          <Link
+            to="/about"
+            style={linkStyle}
+          >
             About
           </Link>
         </li>
 
         <li>
-          <Link to="/contact" style={{ color: "white" }}>
+          <Link
+            to="/contact"
+            style={linkStyle}
+          >
             Contact
           </Link>
         </li>
       </ul>
 
-      {/* User Menu */}
-      <div
-        style={{
-          position: "relative",
-        }}
-      >
-        {user ? (
-          <>
-            <button
-              onClick={() => setShowMenu(!showMenu)}
-              style={{
-                background: "white",
-                color: "#6a11cb",
-                border: "none",
-                padding: "10px 15px",
-                borderRadius: "8px",
-                cursor: "pointer",
-                fontWeight: "bold",
-              }}
-            >
-              👤 {user.name} ▼
-            </button>
+      {/* Right Side */}
 
-            {showMenu && (
+      {user ? (
+        <div
+          style={{
+            position: "relative",
+          }}
+        >
+          {/* Profile Button */}
+
+          <div
+            onClick={() => setShowMenu(!showMenu)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              background: "white",
+              color: "#6a11cb",
+              padding: "8px 15px",
+              borderRadius: "12px",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            {user.profileImage ? (
+              <img
+                src={user.profileImage}
+                alt="Profile"
+                style={{
+                  width: "42px",
+                  height: "42px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "2px solid #6a11cb",
+                }}
+              />
+            ) : (
               <div
                 style={{
-                  position: "absolute",
-                  right: 0,
-                  top: "50px",
-                  background: "white",
-                  color: "black",
-                  width: "220px",
-                  borderRadius: "10px",
-                  boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
-                  overflow: "hidden",
-                  zIndex: 1000,
+                  width: "42px",
+                  height: "42px",
+                  borderRadius: "50%",
+                  background: "#6a11cb",
+                  color: "white",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontWeight: "bold",
+                  fontSize: "18px",
                 }}
               >
-                <div style={menuItemStyle} onClick={() => navigate("/profile")}>
-                  👤 My Profile
-                </div>
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+            )}
 
-                <div style={menuItemStyle} onClick={() => navigate("/orders")}>
-                  📦 My Orders
-                </div>
+            <span>{user.name}</span>
 
-                <div
-                  style={menuItemStyle}
-                  onClick={() => navigate("/wishlist")}
+            <span>▼</span>
+          </div>
+
+          {/* Dropdown */}
+
+          {showMenu && (
+            <div
+              style={{
+                position: "absolute",
+                right: 0,
+                top: "65px",
+                width: "280px",
+                background: "white",
+                color: "#333",
+                borderRadius: "15px",
+                boxShadow: "0 10px 30px rgba(0,0,0,.2)",
+                overflow: "hidden",
+              }}
+            >
+              {/* Profile Header */}
+
+              <div
+                style={{
+                  textAlign: "center",
+                  padding: "25px",
+                  borderBottom: "1px solid #eee",
+                }}
+              >
+                {user.profileImage ? (
+                  <img
+                    src={user.profileImage}
+                    alt=""
+                    style={{
+                      width: "90px",
+                      height: "90px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      border: "3px solid #6a11cb",
+                    }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: "90px",
+                      height: "90px",
+                      borderRadius: "50%",
+                      background: "#6a11cb",
+                      color: "white",
+                      fontSize: "38px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      margin: "auto",
+                    }}
+                  >
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                )}
+
+                <h3
+                  style={{
+                    marginTop: "15px",
+                    marginBottom: "5px",
+                  }}
                 >
-                  ❤️ Wishlist
-                </div>
+                  {user.name}
+                </h3>
 
-                <div style={menuItemStyle} onClick={() => navigate("/cart")}>
-                  🛒 Cart
-                </div>
+                <p
+                  style={{
+                    color: "#888",
+                    margin: 0,
+                  }}
+                >
+                  {user.email}
+                </p>
 
                 <div
                   style={{
-                    ...menuItemStyle,
-                    color: "red",
+                    marginTop: "12px",
+                    display: "inline-block",
+                    padding: "6px 18px",
+                    background: "#6a11cb",
+                    color: "white",
+                    borderRadius: "20px",
+                    fontSize: "14px",
                   }}
-                  onClick={logout}
                 >
-                  🚪 Logout
+                  {user.role}
                 </div>
               </div>
-            )}
-          </>
-        ) : (
-          <Link to="/login">
-            <button
-              style={{
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "8px",
-                cursor: "pointer",
-              }}
-            >
-              Login
-            </button>
-          </Link>
-        )}
-      </div>
+
+              <MenuItem
+                text="👤 My Profile"
+                onClick={() => {
+                  navigate("/profile");
+                  setShowMenu(false);
+                }}
+              />
+
+              <MenuItem
+                text="📦 My Orders"
+                onClick={() => {
+                  navigate("/orders");
+                  setShowMenu(false);
+                }}
+              />
+
+              <MenuItem
+                text="❤️ Wishlist"
+                onClick={() => {
+                  navigate("/wishlist");
+                  setShowMenu(false);
+                }}
+              />
+
+              <MenuItem
+                text="🛒 Cart"
+                onClick={() => {
+                  navigate("/cart");
+                  setShowMenu(false);
+                }}
+              />
+
+              <MenuItem
+                text="🚪 Logout"
+                color="red"
+                onClick={logout}
+              />
+            </div>
+          )}
+        </div>
+      ) : (
+        <Link to="/login">
+          <button
+            style={{
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              background: "white",
+              color: "#6a11cb",
+              fontWeight: "bold",
+            }}
+          >
+            Login
+          </button>
+        </Link>
+      )}
     </nav>
   );
 }
 
-const menuItemStyle = {
-  padding: "12px 15px",
-  cursor: "pointer",
-  borderBottom: "1px solid #eee",
+function MenuItem({ text, onClick, color = "#333" }) {
+  return (
+    <div
+      onClick={onClick}
+      style={{
+        padding: "16px 22px",
+        cursor: "pointer",
+        borderBottom: "1px solid #eee",
+        color,
+        transition: ".3s",
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.background = "#f7f3ff";
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.background = "white";
+      }}
+    >
+      {text}
+    </div>
+  );
+}
+
+const linkStyle = {
+  color: "white",
+  textDecoration: "none",
+  fontWeight: "600",
 };
 
 export default Navbar;

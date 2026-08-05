@@ -28,8 +28,17 @@ public class User {
     private LocalDateTime createdAt;
     @Column(nullable = false)
     private boolean active = true;
+    private String profileImage;
 
-    public User() {
+    public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+
+	public User() {
     }
 
     @PrePersist

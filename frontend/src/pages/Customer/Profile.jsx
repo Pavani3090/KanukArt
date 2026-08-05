@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 function Profile() {
-  const storedUser =
-    JSON.parse(localStorage.getItem("user"));
+  const storedUser = JSON.parse(localStorage.getItem("user"));
 
   const [user, setUser] = useState(storedUser);
 
   const [formData, setFormData] = useState({
     name: storedUser?.name || "",
     email: storedUser?.email || "",
+    profileImage: storedUser?.profileImage || "",
   });
 
   const handleChange = (e) => {
@@ -18,19 +18,57 @@ function Profile() {
     });
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const image = reader.result;
+
+      const updatedUser = {
+        ...user,
+        profileImage: image,
+      };
+
+      setUser(updatedUser);
+
+      setFormData((prev) => ({
+        ...prev,
+        profileImage: image,
+      }));
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(updatedUser)
+      );
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   const handleSave = () => {
     const updatedUser = {
       ...user,
       name: formData.name,
       email: formData.email,
+      profileImage: formData.profileImage,
     };
+
+    setUser(updatedUser);
+
+    setFormData({
+      name: updatedUser.name,
+      email: updatedUser.email,
+      profileImage: updatedUser.profileImage,
+    });
 
     localStorage.setItem(
       "user",
       JSON.stringify(updatedUser)
     );
-
-    setUser(updatedUser);
 
     alert("Profile Updated Successfully ✅");
   };
@@ -45,45 +83,82 @@ function Profile() {
     >
       <div
         style={{
-          maxWidth: "800px",
+          maxWidth: "850px",
           margin: "auto",
-          background: "white",
-          borderRadius: "15px",
-          padding: "30px",
-          boxShadow:
-            "0 3px 10px rgba(0,0,0,0.1)",
+          background: "#fff",
+          borderRadius: "18px",
+          padding: "35px",
+          boxShadow: "0 5px 20px rgba(0,0,0,.1)",
         }}
       >
         <h1>👤 My Profile</h1>
 
-        <hr />
+        <hr style={{ marginBottom: "30px" }} />
 
         <div
           style={{
             textAlign: "center",
-            marginBottom: "30px",
+            marginBottom: "40px",
           }}
         >
-          <div
+          {formData.profileImage ? (
+            <img
+              src={formData.profileImage}
+              alt="Profile"
+              style={{
+                width: "150px",
+                height: "150px",
+                borderRadius: "50%",
+                objectFit: "cover",
+                border: "5px solid #6a11cb",
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                width: "150px",
+                height: "150px",
+                borderRadius: "50%",
+                background: "#6a11cb",
+                color: "white",
+                fontSize: "55px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "auto",
+              }}
+            >
+              {formData.name.charAt(0).toUpperCase()}
+            </div>
+          )}
+
+          <br />
+          <br />
+
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+
+          <h2
             style={{
-              width: "120px",
-              height: "120px",
-              borderRadius: "50%",
-              background: "#6a11cb",
-              color: "white",
-              fontSize: "40px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "auto",
+              marginTop: "20px",
             }}
           >
-            {user?.name?.charAt(0)}
-          </div>
+            {formData.name}
+          </h2>
 
-          <h2>{user?.name}</h2>
-
-          <p>{user?.role}</p>
+          <span
+            style={{
+              background: "#6a11cb",
+              color: "white",
+              padding: "6px 18px",
+              borderRadius: "25px",
+            }}
+          >
+            {user.role}
+          </span>
         </div>
 
         <label>Full Name</label>
@@ -110,24 +185,26 @@ function Profile() {
 
         <input
           type="text"
-          value={user?.role}
+          value={user.role}
           disabled
           style={{
             ...inputStyle,
-            background: "#eee",
+            background: "#f1f1f1",
           }}
         />
 
         <button
           onClick={handleSave}
           style={{
-            marginTop: "20px",
+            marginTop: "25px",
             background: "#6a11cb",
             color: "white",
             border: "none",
-            padding: "12px 20px",
-            borderRadius: "8px",
+            padding: "14px 30px",
+            borderRadius: "10px",
             cursor: "pointer",
+            fontSize: "16px",
+            fontWeight: "bold",
           }}
         >
           Save Changes
@@ -139,11 +216,12 @@ function Profile() {
 
 const inputStyle = {
   width: "100%",
-  padding: "12px",
+  padding: "13px",
   marginTop: "8px",
   marginBottom: "20px",
   border: "1px solid #ddd",
   borderRadius: "8px",
+  fontSize: "15px",
 };
 
 export default Profile;
