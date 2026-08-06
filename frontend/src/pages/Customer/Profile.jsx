@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import api from "../../services/api";
 function Profile() {
   const storedUser = JSON.parse(localStorage.getItem("user"));
 
@@ -49,7 +49,15 @@ function Profile() {
     reader.readAsDataURL(file);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+  try {
+
+    await api.put(`/users/${user.id}/profile`, {
+      name: formData.name,
+      email: formData.email,
+      profileImage: formData.profileImage,
+    });
+
     const updatedUser = {
       ...user,
       name: formData.name,
@@ -59,19 +67,20 @@ function Profile() {
 
     setUser(updatedUser);
 
-    setFormData({
-      name: updatedUser.name,
-      email: updatedUser.email,
-      profileImage: updatedUser.profileImage,
-    });
-
     localStorage.setItem(
       "user",
       JSON.stringify(updatedUser)
     );
 
     alert("Profile Updated Successfully ✅");
-  };
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Failed to update profile");
+  }
+};
 
   return (
     <div

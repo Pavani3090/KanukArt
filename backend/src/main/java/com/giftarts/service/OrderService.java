@@ -1,24 +1,23 @@
 package com.giftarts.service;
-
 import java.time.LocalDateTime;
-import com.giftarts.entity.OrderItem;
-import com.giftarts.repository.OrderItemRepository;
 import java.util.List;
-import com.giftarts.dto.OrderItemResponse;
 
 import org.springframework.stereotype.Service;
 
-import com.giftarts.entity.Order;
-import com.giftarts.repository.OrderRepository;
+import com.giftarts.dto.ArtistOrderResponse;
 import com.giftarts.dto.CartItemDto;
 import com.giftarts.dto.CheckoutRequest;
+import com.giftarts.dto.OrderItemResponse;
+
 import com.giftarts.entity.Artwork;
+import com.giftarts.entity.Order;
 import com.giftarts.entity.OrderItem;
 import com.giftarts.entity.User;
+
 import com.giftarts.repository.ArtworkRepository;
 import com.giftarts.repository.OrderItemRepository;
+import com.giftarts.repository.OrderRepository;
 import com.giftarts.repository.UserRepository;
-
 @Service
 public class OrderService {
 
@@ -110,5 +109,8 @@ public class OrderService {
         order.setStatus(status);
 
         return orderRepository.save(order);
+    }
+    public List<ArtistOrderResponse> getOrdersByArtist(Long artistId) {
+        return orderItemRepository.findOrdersByArtist(artistId);
     }
 }

@@ -28,15 +28,17 @@ public class User {
     private LocalDateTime createdAt;
     @Column(nullable = false)
     private boolean active = true;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String profileImage;
 
     public String getProfileImage() {
-		return profileImage;
-	}
+        return profileImage;
+    }
 
-	public void setProfileImage(String profileImage) {
-		this.profileImage = profileImage;
-	}
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
 
 	public User() {
     }

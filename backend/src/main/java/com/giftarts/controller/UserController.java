@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.giftarts.entity.User;
 import com.giftarts.service.UserService;
+import com.giftarts.dto.ProfileUpdateRequest;
 
 @RestController
 @RequestMapping("/api/users")
@@ -38,5 +39,17 @@ public class UserController {
             @PathVariable Long id) {
 
         userService.toggleUserStatus(id);
+    }
+   
+    @PutMapping("/{id}/profile")
+    public void updateProfile(
+            @PathVariable Long id,
+            @RequestBody ProfileUpdateRequest request) {
+
+        System.out.println("===== UPDATE PROFILE =====");
+        System.out.println("User ID : " + id);
+        System.out.println("Name : " + request.getName());
+
+        userService.updateProfile(id, request);
     }
 }

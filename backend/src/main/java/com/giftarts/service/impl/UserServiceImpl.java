@@ -8,12 +8,14 @@ import com.giftarts.entity.Role;
 import com.giftarts.entity.User;
 import com.giftarts.repository.UserRepository;
 import com.giftarts.service.UserService;
+import com.giftarts.dto.ProfileUpdateRequest;
 
 import java.util.List;
 
 import com.giftarts.dto.LoginRequest;
 import com.giftarts.dto.LoginResponse;
 
+import com.giftarts.dto.ProfileUpdateRequest;
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -79,6 +81,7 @@ public class UserServiceImpl implements UserService {
                 user.getName(),
                 user.getEmail(),
                 user.getRole().name(),
+                user.getProfileImage(),
                 "Login Successful"
         );
     }
@@ -102,6 +105,18 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow();
 
         user.setActive(!user.isActive());
+
+        userRepository.save(user);
+    }
+    @Override
+    public void updateProfile(Long id, ProfileUpdateRequest request) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setProfileImage(request.getProfileImage());
 
         userRepository.save(user);
     }

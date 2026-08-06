@@ -76,3 +76,79 @@
   border-radius:8px;
   cursor:pointer;
 }
+.status-tabs{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:30px 0;
+    flex-wrap:wrap;
+}
+
+.status-tabs button{
+    padding:10px 25px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    background:#ececec;
+    font-weight:600;
+    transition:.3s;
+}
+
+.status-tabs button:hover{
+    background:#d8c8ff;
+}
+
+.status-tabs .active{
+    background:#6a11cb;
+    color:white;
+}
+
+.status-badge{
+    display:inline-block;
+    margin-top:10px;
+    margin-bottom:15px;
+    padding:6px 15px;
+    border-radius:20px;
+    color:white;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.status-badge.approved{
+    background:#28a745;
+}
+
+.status-badge.pending{
+    background:#f39c12;
+}
+
+.status-badge.rejected{
+    background:#dc3545;
+}
+.artwork-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:12px 0;
+}
+
+.status-badge{
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+    color:white;
+}
+
+.status-badge.approved{
+    background:#28a745;
+}
+
+.status-badge.pending{
+    background:#ffc107;
+    color:#333;
+}
+
+.status-badge.rejected{
+    background:#dc3545;
+}

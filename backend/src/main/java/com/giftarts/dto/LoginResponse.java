@@ -1,10 +1,12 @@
 package com.giftarts.dto;
+
 public class LoginResponse {
 
     private Long id;
     private String name;
     private String email;
     private String role;
+    private String profileImage;
     private String message;
 
     public LoginResponse() {
@@ -15,12 +17,14 @@ public class LoginResponse {
             String name,
             String email,
             String role,
+            String profileImage,
             String message) {
 
         this.id = id;
         this.name = name;
         this.email = email;
         this.role = role;
+        this.profileImage = profileImage;
         this.message = message;
     }
 
@@ -54,6 +58,14 @@ public class LoginResponse {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
     public String getMessage() {

@@ -29,6 +29,7 @@ import ManageOrders from "../pages/Admin/ManageOrders";
 import ManageArtworks from "../pages/Admin/ManageArtworks";
 import ManageUsers from "../pages/Admin/ManageUsers";
 import Profile from "../pages/Customer/Profile";
+import ArtistOrders from "../pages/artist/ArtistOrders";
 
 function AppRoutes() {
   return (
@@ -79,6 +80,7 @@ function AppRoutes() {
 
         <Route path="/admin/users" element={<ManageUsers />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/artist-orders" element={<ArtistOrders />} />
       </Routes>
     </>
   );

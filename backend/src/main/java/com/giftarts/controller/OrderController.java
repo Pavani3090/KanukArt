@@ -1,6 +1,7 @@
 package com.giftarts.controller;
 
 import java.util.List;
+import com.giftarts.dto.ArtistOrderResponse;
 import com.giftarts.dto.OrderItemResponse;
 import com.giftarts.dto.CheckoutRequest;
 
@@ -53,6 +54,13 @@ public class OrderController {
                 orderId,
                 status
         );
+    }
+    @GetMapping("/artist/{artistId}")
+    public List<ArtistOrderResponse> getOrdersByArtist(
+            @PathVariable Long artistId) {
+
+        return orderService.getOrdersByArtist(artistId);
+
     }
     
 }

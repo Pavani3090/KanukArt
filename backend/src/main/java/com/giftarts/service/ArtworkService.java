@@ -71,21 +71,45 @@ public class ArtworkService {
         long totalArtworks =
                 artworkRepository.countByArtistId(artistId);
 
+        long approvedArtworks =
+                artworkRepository.countByArtistIdAndStatus(
+                        artistId,
+                        "APPROVED"
+                );
+
+        long pendingArtworks =
+                artworkRepository.countByArtistIdAndStatus(
+                        artistId,
+                        "PENDING"
+                );
+
+        long rejectedArtworks =
+                artworkRepository.countByArtistIdAndStatus(
+                        artistId,
+                        "REJECTED"
+                );
+
         long totalOrders =
                 orderItemRepository.countOrdersByArtist(artistId);
 
-        double revenue =
+        Double revenue =
                 orderItemRepository.getRevenueByArtist(artistId);
+
+        if (revenue == null) {
+            revenue = 0.0;
+        }
 
         ArtistStats stats = new ArtistStats();
 
         stats.setTotalArtworks(totalArtworks);
+        stats.setApprovedArtworks(approvedArtworks);
+        stats.setPendingArtworks(pendingArtworks);
+        stats.setRejectedArtworks(rejectedArtworks);
         stats.setTotalOrders(totalOrders);
         stats.setRevenue(revenue);
 
         return stats;
     }
-
     // =========================
     // Artwork Approval System
     // =========================

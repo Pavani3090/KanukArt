@@ -6,6 +6,8 @@ import "./ArtistDashboard.css";
 function ArtistDashboard() {
   const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const [stats, setStats] = useState({
     totalArtworks: 0,
     approvedArtworks: 0,
@@ -15,26 +17,15 @@ function ArtistDashboard() {
     revenue: 0,
   });
 
-  const user = JSON.parse(localStorage.getItem("user"));
-
   useEffect(() => {
     fetchStats();
   }, []);
 
   const fetchStats = async () => {
     try {
-      const response = await api.get(
-        `/artworks/artist-stats/${user.id}`
-      );
+      const response = await api.get(`/artworks/artist-stats/${user.id}`);
 
-      setStats({
-        totalArtworks: response.data.totalArtworks || 0,
-        approvedArtworks: response.data.approvedArtworks || 0,
-        pendingArtworks: response.data.pendingArtworks || 0,
-        rejectedArtworks: response.data.rejectedArtworks || 0,
-        totalOrders: response.data.totalOrders || 0,
-        revenue: response.data.revenue || 0,
-      });
+      setStats(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -42,65 +33,74 @@ function ArtistDashboard() {
 
   return (
     <div className="artist-dashboard">
-
       {/* Header */}
+
       <div className="dashboard-header">
         <h1>🎨 Welcome back, {user?.name}</h1>
 
         <p>
-          Manage your artworks, track approvals and grow your creative
+          Manage your artworks, monitor approvals and grow your creative
           business with KanukArt.
         </p>
       </div>
 
       {/* Statistics */}
-      <div className="stats-container">
 
-        <div className="stat-card">
+      <div className="stats-container">
+        <div className="stat-card" onClick={() => navigate("/my-artworks")}>
           <h2>{stats.totalArtworks}</h2>
           <p>🖼 Total Artworks</p>
         </div>
 
-        <div className="stat-card approved">
+        <div
+          className="stat-card approved"
+          onClick={() => navigate("/my-artworks?status=APPROVED")}
+        >
           <h2>{stats.approvedArtworks}</h2>
           <p>✅ Approved</p>
         </div>
 
-        <div className="stat-card pending">
+        <div
+          className="stat-card pending"
+          onClick={() => navigate("/my-artworks?status=PENDING")}
+        >
           <h2>{stats.pendingArtworks}</h2>
           <p>🟡 Pending</p>
         </div>
 
-        <div className="stat-card rejected">
+        <div
+          className="stat-card rejected"
+          onClick={() => navigate("/my-artworks?status=REJECTED")}
+        >
           <h2>{stats.rejectedArtworks}</h2>
           <p>❌ Rejected</p>
         </div>
 
-        <div className="stat-card">
-          <h2>{stats.totalOrders}</h2>
-          <p>📦 Orders</p>
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/artist-orders")}
+        >
+          <h2>📦 Orders</h2>
+
+          <p>View customer orders, order status and sales history.</p>
         </div>
 
         <div className="stat-card revenue">
           <h2>₹{stats.revenue}</h2>
           <p>💰 Revenue</p>
         </div>
-
       </div>
 
       {/* Quick Actions */}
-      <div className="dashboard-cards">
 
+      <div className="dashboard-cards">
         <div
           className="dashboard-card"
           onClick={() => navigate("/add-artwork")}
         >
           <h2>🎨 Upload Artwork</h2>
 
-          <p>
-            Showcase your latest paintings,
-            sketches, pottery and handmade creations.
-          </p>
+          <p>Upload paintings, sketches, pottery and custom creations.</p>
         </div>
 
         <div
@@ -109,39 +109,24 @@ function ArtistDashboard() {
         >
           <h2>🖼 Manage Artworks</h2>
 
-          <p>
-            View, edit and manage your uploaded
-            artworks in one place.
-          </p>
+          <p>View, edit and organize all your uploaded artworks.</p>
         </div>
 
-        <div
-          className="dashboard-card"
-          onClick={() => alert("Coming Soon")}
-        >
-          <h2>📊 Sales Analytics</h2>
+        <div className="dashboard-card" onClick={() => alert("Coming Soon")}>
+          <h2>📈 Sales Analytics</h2>
 
-          <p>
-            Monitor your artwork performance,
-            sales and customer engagement.
-          </p>
+          <p>Monitor performance, views and future sales.</p>
         </div>
 
-        <div
-          className="dashboard-card"
-          onClick={() => alert("Coming Soon")}
-        >
+        <div className="dashboard-card" onClick={() => alert("Coming Soon")}>
           <h2>🔔 Notifications</h2>
 
-          <p>
-            Track artwork approvals,
-            orders and important updates.
-          </p>
+          <p>Artwork approvals, customer updates and alerts.</p>
         </div>
-
       </div>
 
-      {/* Coming Soon */}
+      {/* Upcoming */}
+
       <div
         style={{
           marginTop: "40px",
@@ -160,13 +145,12 @@ function ArtistDashboard() {
           }}
         >
           <li>📦 Order Management</li>
-          <li>💳 Payment & Revenue Reports</li>
-          <li>📈 Monthly Sales Analytics</li>
-          <li>⭐ Customer Ratings & Reviews</li>
+          <li>💳 Payment Reports</li>
+          <li>📈 Monthly Analytics</li>
+          <li>⭐ Customer Reviews</li>
           <li>💬 Customer Messages</li>
         </ul>
       </div>
-
     </div>
   );
 }

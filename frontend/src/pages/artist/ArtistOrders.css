@@ -1,0 +1,63 @@
+.artist-orders{
+    padding:40px;
+    min-height:100vh;
+    background:#f7f7fb;
+}
+
+.artist-orders h1{
+    color:#5a189a;
+    margin-bottom:30px;
+}
+
+.orders-table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.orders-table th{
+    background:#6a11cb;
+    color:white;
+    padding:18px;
+    text-align:left;
+}
+
+.orders-table td{
+    padding:18px;
+    border-bottom:1px solid #eee;
+}
+
+.orders-table tr:hover{
+    background:#faf7ff;
+}
+
+.artwork-cell{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.artwork-cell img{
+    width:70px;
+    height:70px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.status-badge{
+    color:white;
+    padding:6px 15px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.empty-orders{
+    background:white;
+    text-align:center;
+    padding:60px;
+    border-radius:15px;
+}

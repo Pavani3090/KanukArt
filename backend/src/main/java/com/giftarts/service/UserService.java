@@ -4,20 +4,23 @@ import java.util.List;
 
 import com.giftarts.dto.LoginRequest;
 import com.giftarts.dto.LoginResponse;
+import com.giftarts.dto.ProfileUpdateRequest;
 import com.giftarts.dto.RegisterRequest;
 import com.giftarts.entity.User;
 
 public interface UserService {
 
-	 User register(RegisterRequest request);
+    User register(RegisterRequest request);
 
-	    LoginResponse login(LoginRequest request);
+    LoginResponse login(LoginRequest request);
 
-	    List<User> getAllUsers();
+    List<User> getAllUsers();
 
-	    void deleteUser(Long id);
+    void deleteUser(Long id);
 
-	    List<User> getArtists();
+    List<User> getArtists();
 
-	    void toggleUserStatus(Long id);
+    void toggleUserStatus(Long id);
+
+    void updateProfile(Long id, ProfileUpdateRequest request);
 }
