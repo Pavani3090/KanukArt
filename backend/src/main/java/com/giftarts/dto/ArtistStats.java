@@ -2,61 +2,77 @@ package com.giftarts.dto;
 
 public class ArtistStats {
 
-    private Long totalArtworks;
-    private Long approvedArtworks;
-    private Long pendingArtworks;
-    private Long rejectedArtworks;
-    private Long totalOrders;
-    private Double revenue;
+    private long totalArtworks;
+    private long approvedArtworks;
+    private long pendingArtworks;
+    private long rejectedArtworks;
+    private long totalOrders;
+    private double revenue;
 
     public ArtistStats() {
     }
 
-    public Long getTotalArtworks() {
+    public ArtistStats(
+            long totalArtworks,
+            long approvedArtworks,
+            long pendingArtworks,
+            long rejectedArtworks,
+            long totalOrders,
+            double revenue) {
+
+        this.totalArtworks = totalArtworks;
+        this.approvedArtworks = approvedArtworks;
+        this.pendingArtworks = pendingArtworks;
+        this.rejectedArtworks = rejectedArtworks;
+        this.totalOrders = totalOrders;
+        this.revenue = revenue;
+    }
+
+    public long getTotalArtworks() {
         return totalArtworks;
     }
 
-    public void setTotalArtworks(Long totalArtworks) {
+    public void setTotalArtworks(long totalArtworks) {
         this.totalArtworks = totalArtworks;
     }
 
-    public Long getApprovedArtworks() {
+    public long getApprovedArtworks() {
         return approvedArtworks;
     }
 
-    public void setApprovedArtworks(Long approvedArtworks) {
+    public void setApprovedArtworks(long approvedArtworks) {
         this.approvedArtworks = approvedArtworks;
     }
 
-    public Long getPendingArtworks() {
+    public long getPendingArtworks() {
         return pendingArtworks;
     }
 
-    public void setPendingArtworks(Long pendingArtworks) {
+    public void setPendingArtworks(long pendingArtworks) {
         this.pendingArtworks = pendingArtworks;
     }
 
-    public Long getRejectedArtworks() {
+    public long getRejectedArtworks() {
         return rejectedArtworks;
     }
 
-    public void setRejectedArtworks(Long rejectedArtworks) {
+    public void setRejectedArtworks(long rejectedArtworks) {
         this.rejectedArtworks = rejectedArtworks;
     }
 
-    public Long getTotalOrders() {
+    public long getTotalOrders() {
         return totalOrders;
     }
 
-    public void setTotalOrders(Long totalOrders) {
+    public void setTotalOrders(long totalOrders) {
         this.totalOrders = totalOrders;
     }
 
-    public Double getRevenue() {
+    public double getRevenue() {
         return revenue;
     }
 
-    public void setRevenue(Double revenue) {
+    public void setRevenue(double revenue) {
         this.revenue = revenue;
     }
 }

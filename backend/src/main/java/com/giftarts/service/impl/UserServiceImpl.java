@@ -1,21 +1,19 @@
 package com.giftarts.service.impl;
 
+import java.util.List;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.giftarts.dto.LoginRequest;
+import com.giftarts.dto.LoginResponse;
+import com.giftarts.dto.ProfileUpdateRequest;
 import com.giftarts.dto.RegisterRequest;
 import com.giftarts.entity.Role;
 import com.giftarts.entity.User;
 import com.giftarts.repository.UserRepository;
 import com.giftarts.service.UserService;
-import com.giftarts.dto.ProfileUpdateRequest;
 
-import java.util.List;
-
-import com.giftarts.dto.LoginRequest;
-import com.giftarts.dto.LoginResponse;
-
-import com.giftarts.dto.ProfileUpdateRequest;
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -37,6 +35,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Email already exists");
         }
 
+        // Admin accounts cannot be created through registration
         if (request.getRole() == Role.ADMIN) {
             throw new RuntimeException("Admin registration is not allowed");
         }
@@ -50,7 +49,16 @@ public class UserServiceImpl implements UserService {
                 passwordEncoder.encode(request.getPassword())
         );
 
-        user.setRole(request.getRole());
+        /*
+         * If no role is supplied, create a CUSTOMER.
+         */
+        if (request.getRole() == null) {
+            user.setRole(Role.CUSTOMER);
+        } else {
+            user.setRole(request.getRole());
+        }
+
+        user.setActive(true);
 
         return userRepository.save(user);
     }
@@ -70,7 +78,8 @@ public class UserServiceImpl implements UserService {
 
         boolean matches = passwordEncoder.matches(
                 request.getPassword(),
-                user.getPassword());
+                user.getPassword()
+        );
 
         if (!matches) {
             throw new RuntimeException("Invalid Password");
@@ -85,6 +94,7 @@ public class UserServiceImpl implements UserService {
                 "Login Successful"
         );
     }
+
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -94,25 +104,32 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
     @Override
     public List<User> getArtists() {
         return userRepository.findByRole(Role.ARTIST);
     }
+
     @Override
     public void toggleUserStatus(Long id) {
 
         User user = userRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
 
         user.setActive(!user.isActive());
 
         userRepository.save(user);
     }
+
     @Override
-    public void updateProfile(Long id, ProfileUpdateRequest request) {
+    public void updateProfile(
+            Long id,
+            ProfileUpdateRequest request) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
 
         user.setName(request.getName());
         user.setEmail(request.getEmail());

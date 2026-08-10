@@ -1,6 +1,7 @@
 package com.giftarts.controller;
 
 import java.util.List;
+
 import com.giftarts.dto.ArtistOrderResponse;
 import com.giftarts.dto.OrderItemResponse;
 import com.giftarts.dto.CheckoutRequest;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.giftarts.entity.Order;
 import com.giftarts.service.OrderService;
+import com.giftarts.entity.OrderItem;
+import com.giftarts.dto.CustomerOrderResponse;
+
 
 @RestController
 @RequestMapping("/api/orders")
@@ -61,6 +65,22 @@ public class OrderController {
 
         return orderService.getOrdersByArtist(artistId);
 
+    }
+    @PutMapping("/item/{orderItemId}/status")
+    public OrderItem updateOrderItemStatus(
+            @PathVariable Long orderItemId,
+            @RequestParam String status) {
+
+        return orderService.updateOrderItemStatus(
+                orderItemId,
+                status
+        );
+    }
+    @GetMapping("/customer/{userId}")
+    public List<CustomerOrderResponse> getCustomerOrders(
+            @PathVariable Long userId) {
+
+        return orderService.getCustomerOrders(userId);
     }
     
 }

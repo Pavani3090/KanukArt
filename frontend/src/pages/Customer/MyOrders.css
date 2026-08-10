@@ -1,8 +1,53 @@
+.customer-orders-container{
+    padding:30px;
+}
+
+.customer-orders-container h1{
+    margin-bottom:25px;
+}
+
+.customer-orders-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.customer-orders-table th{
+    background:#6A1B9A;
+    color:white;
+    padding:15px;
+}
+
+.customer-orders-table td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+.artwork-cell{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.artwork-cell img{
+    width:70px;
+    height:70px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
 .status-badge{
-  background:#fff3cd;
-  color:#856404;
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:14px;
-  font-weight:600;
+    color:white;
+    padding:6px 15px;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+.empty-orders{
+    padding:60px;
+    text-align:center;
 }

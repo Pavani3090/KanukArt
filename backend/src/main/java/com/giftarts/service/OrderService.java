@@ -13,6 +13,7 @@ import com.giftarts.entity.Artwork;
 import com.giftarts.entity.Order;
 import com.giftarts.entity.OrderItem;
 import com.giftarts.entity.User;
+import com.giftarts.dto.CustomerOrderResponse;
 
 import com.giftarts.repository.ArtworkRepository;
 import com.giftarts.repository.OrderItemRepository;
@@ -62,13 +63,15 @@ public class OrderService {
                             .findById(item.getArtworkId())
                             .orElseThrow();
 
-            OrderItem orderItem =
-                    new OrderItem();
+            OrderItem orderItem = new OrderItem();
 
             orderItem.setOrder(savedOrder);
             orderItem.setArtwork(artwork);
             orderItem.setQuantity(item.getQuantity());
             orderItem.setPrice(item.getPrice());
+
+            // Every artwork starts as PENDING
+            orderItem.setStatus("PENDING");
 
             orderItemRepository.save(orderItem);
         }
@@ -112,5 +115,21 @@ public class OrderService {
     }
     public List<ArtistOrderResponse> getOrdersByArtist(Long artistId) {
         return orderItemRepository.findOrdersByArtist(artistId);
+    }
+    public OrderItem updateOrderItemStatus(
+            Long orderItemId,
+            String status) {
+
+        OrderItem item = orderItemRepository
+                .findById(orderItemId)
+                .orElseThrow();
+
+        item.setStatus(status);
+
+        return orderItemRepository.save(item);
+    }
+    public List<CustomerOrderResponse> getCustomerOrders(Long userId) {
+
+        return orderItemRepository.findCustomerOrders(userId);
     }
 }

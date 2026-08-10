@@ -21,8 +21,19 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "artwork_id")
     private Artwork artwork;
+    
+    @Column(nullable = false)
+    private String status = "PENDING";
 
-    public OrderItem() {
+    public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public OrderItem() {
     }
 
     public Long getId() {

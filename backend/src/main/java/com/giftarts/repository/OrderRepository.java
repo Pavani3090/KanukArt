@@ -1,20 +1,21 @@
 package com.giftarts.repository;
 
 import java.util.List;
-import org.springframework.data.jpa.repository.Query;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.giftarts.entity.Order;
 
-public interface OrderRepository
-        extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findByUserId(Long userId);
+
     @Query("""
-    	    SELECT COALESCE(SUM(o.totalAmount),0)
-    	    FROM Order o
-    	""")
-    	Double getTotalRevenue();
-    
+        SELECT COALESCE(SUM(o.totalAmount), 0)
+        FROM Order o
+    """)
+    Double getTotalRevenue();
+
+    long countByStatus(String status);
 }

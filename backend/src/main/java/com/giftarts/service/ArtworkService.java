@@ -4,120 +4,135 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.giftarts.dto.ArtistStats;
 import com.giftarts.entity.Artwork;
 import com.giftarts.repository.ArtworkRepository;
-import com.giftarts.repository.OrderItemRepository;
-import com.giftarts.repository.OrderRepository;
 
 @Service
 public class ArtworkService {
 
     private final ArtworkRepository artworkRepository;
-    private final OrderRepository orderRepository;
-    private final OrderItemRepository orderItemRepository;
 
     public ArtworkService(
-            ArtworkRepository artworkRepository,
-            OrderRepository orderRepository,
-            OrderItemRepository orderItemRepository) {
+            ArtworkRepository artworkRepository) {
 
         this.artworkRepository = artworkRepository;
-        this.orderRepository = orderRepository;
-        this.orderItemRepository = orderItemRepository;
     }
 
+    // =========================
+    // CREATE ARTWORK
+    // =========================
+
     public Artwork saveArtwork(Artwork artwork) {
+
         return artworkRepository.save(artwork);
     }
 
+    // =========================
+    // GET ALL ARTWORKS
+    // =========================
+
     public List<Artwork> getAllArtworks() {
+
         return artworkRepository.findAll();
     }
 
+    // =========================
+    // DELETE ARTWORK
+    // =========================
+
     public void deleteArtwork(Long id) {
+
         artworkRepository.deleteById(id);
     }
 
-    public Artwork updateArtwork(Long id, Artwork updatedArtwork) {
+    // =========================
+    // UPDATE ARTWORK
+    // =========================
+
+    public Artwork updateArtwork(
+            Long id,
+            Artwork updatedArtwork) {
 
         Artwork artwork = artworkRepository
                 .findById(id)
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Artwork not found"
+                        )
+                );
 
-        artwork.setTitle(updatedArtwork.getTitle());
-        artwork.setDescription(updatedArtwork.getDescription());
-        artwork.setCategory(updatedArtwork.getCategory());
-        artwork.setPrice(updatedArtwork.getPrice());
-        artwork.setImageUrl(updatedArtwork.getImageUrl());
+        artwork.setTitle(
+                updatedArtwork.getTitle()
+        );
+
+        artwork.setDescription(
+                updatedArtwork.getDescription()
+        );
+
+        artwork.setCategory(
+                updatedArtwork.getCategory()
+        );
+
+        artwork.setPrice(
+                updatedArtwork.getPrice()
+        );
+
+        artwork.setImageUrl(
+                updatedArtwork.getImageUrl()
+        );
 
         return artworkRepository.save(artwork);
     }
+
+    // =========================
+    // GET ARTWORK BY ID
+    // =========================
 
     public Artwork getArtworkById(Long id) {
 
         return artworkRepository
                 .findById(id)
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Artwork not found"
+                        )
+                );
     }
 
-    public List<Artwork> getArtistArtworks(Long artistId) {
-
-        return artworkRepository.findByArtistId(artistId);
-    }
-
-    public ArtistStats getArtistStats(Long artistId) {
-
-        long totalArtworks =
-                artworkRepository.countByArtistId(artistId);
-
-        long approvedArtworks =
-                artworkRepository.countByArtistIdAndStatus(
-                        artistId,
-                        "APPROVED"
-                );
-
-        long pendingArtworks =
-                artworkRepository.countByArtistIdAndStatus(
-                        artistId,
-                        "PENDING"
-                );
-
-        long rejectedArtworks =
-                artworkRepository.countByArtistIdAndStatus(
-                        artistId,
-                        "REJECTED"
-                );
-
-        long totalOrders =
-                orderItemRepository.countOrdersByArtist(artistId);
-
-        Double revenue =
-                orderItemRepository.getRevenueByArtist(artistId);
-
-        if (revenue == null) {
-            revenue = 0.0;
-        }
-
-        ArtistStats stats = new ArtistStats();
-
-        stats.setTotalArtworks(totalArtworks);
-        stats.setApprovedArtworks(approvedArtworks);
-        stats.setPendingArtworks(pendingArtworks);
-        stats.setRejectedArtworks(rejectedArtworks);
-        stats.setTotalOrders(totalOrders);
-        stats.setRevenue(revenue);
-
-        return stats;
-    }
     // =========================
-    // Artwork Approval System
+    // GET ARTIST ARTWORKS
+    // =========================
+
+    public List<Artwork> getArtistArtworks(
+            Long artistId) {
+
+        return artworkRepository
+                .findByArtistId(artistId);
+    }
+
+    // =========================
+    // PENDING ARTWORKS
     // =========================
 
     public List<Artwork> getPendingArtworks() {
 
-        return artworkRepository.findByStatus("PENDING");
+        return artworkRepository
+                .findByStatus("PENDING");
     }
+
+    // =========================
+    // APPROVED ARTWORKS
+    // =========================
+
+    public List<Artwork> getApprovedArtworks() {
+
+        return artworkRepository
+                .findByStatus("APPROVED");
+    }
+
+    // =========================
+    // UPDATE ARTWORK STATUS
+    // =========================
 
     public Artwork updateArtworkStatus(
             Long id,
@@ -125,16 +140,14 @@ public class ArtworkService {
 
         Artwork artwork = artworkRepository
                 .findById(id)
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Artwork not found"
+                        )
+                );
 
         artwork.setStatus(status);
 
         return artworkRepository.save(artwork);
-    }
-    public List<Artwork> getApprovedArtworks() {
-
-        return artworkRepository.findByStatus(
-                "APPROVED"
-        );
     }
 }

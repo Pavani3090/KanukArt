@@ -2,10 +2,10 @@ package com.giftarts.dto;
 
 import java.time.LocalDateTime;
 
-public class ArtistOrderResponse {
+public class CustomerOrderResponse {
 
+    private Long orderItemId;
     private Long orderId;
-    private String customerName;
 
     private Long artworkId;
     private String artworkTitle;
@@ -16,15 +16,13 @@ public class ArtistOrderResponse {
 
     private String status;
     private LocalDateTime orderDate;
-    private Long orderItemId;
 
-    public ArtistOrderResponse() {
+    public CustomerOrderResponse() {
     }
 
-    public ArtistOrderResponse(
+    public CustomerOrderResponse(
             Long orderItemId,
             Long orderId,
-            String customerName,
             Long artworkId,
             String artworkTitle,
             String artworkImage,
@@ -35,7 +33,6 @@ public class ArtistOrderResponse {
 
         this.orderItemId = orderItemId;
         this.orderId = orderId;
-        this.customerName = customerName;
         this.artworkId = artworkId;
         this.artworkTitle = artworkTitle;
         this.artworkImage = artworkImage;
@@ -44,7 +41,7 @@ public class ArtistOrderResponse {
         this.status = status;
         this.orderDate = orderDate;
     }
-    
+
     public Long getOrderItemId() {
         return orderItemId;
     }
@@ -59,14 +56,6 @@ public class ArtistOrderResponse {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
     }
 
     public Long getArtworkId() {

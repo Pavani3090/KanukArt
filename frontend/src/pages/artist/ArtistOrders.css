@@ -61,3 +61,102 @@
     padding:60px;
     border-radius:15px;
 }
+.accept-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: 0.3s;
+}
+
+.accept-btn:hover {
+  background: #388e3c;
+}
+
+.reject-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.reject-btn:hover {
+  background: #d32f2f;
+}
+
+.accepted-text {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.rejected-text {
+  color: #f44336;
+  font-weight: bold;
+}
+.accept-btn,
+.reject-btn,
+.ship-btn,
+.deliver-btn {
+
+    border:none;
+    padding:8px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    color:white;
+    margin:5px;
+    font-weight:600;
+}
+
+.accept-btn{
+    background:#4caf50;
+}
+
+.reject-btn{
+    background:#f44336;
+}
+
+.ship-btn{
+    background:#2196f3;
+}
+
+.deliver-btn{
+    background:#673ab7;
+}
+
+.completed-label{
+    color:#4caf50;
+    font-weight:bold;
+}
+.ship-btn {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.ship-btn:hover {
+  background: #1976d2;
+}
+
+.waiting-text {
+  color: #2196f3;
+  font-weight: 600;
+}
+
+.completed-text {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.rejected-text {
+  color: #f44336;
+  font-weight: bold;
+}

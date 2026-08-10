@@ -1,0 +1,778 @@
+/* =====================================================
+   KANUKART - ADD ARTWORK
+   Luxury Purple & Gold Theme
+   ===================================================== */
+
+.add-artwork-page {
+    min-height: 100vh;
+    padding: 50px 25px 80px;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(126, 87, 194, 0.12),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(212, 175, 55, 0.08),
+            transparent 35%
+        ),
+        #f8f5fc;
+
+    color: #2b1b3d;
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+   ===================================================== */
+
+.add-artwork-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.add-artwork-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+
+    margin-bottom: 35px;
+}
+
+
+.artwork-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #b58b1d;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.add-artwork-header h1 {
+    margin: 0 0 10px;
+
+    color: #4b216f;
+
+    font-size: 36px;
+    font-weight: 800;
+}
+
+
+.add-artwork-header p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #756a7e;
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+   ===================================================== */
+
+.back-button {
+    flex-shrink: 0;
+
+    padding: 12px 20px;
+
+    border: 1px solid #d9c9e8;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #542779;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+.back-button:hover {
+    border-color: #b58b1d;
+
+    background: #542779;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(84, 39, 121, 0.18);
+}
+
+
+/* =====================================================
+   FORM CARD
+   ===================================================== */
+
+.artwork-form-card {
+    padding: 40px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border: 1px solid #eadff1;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 55px rgba(65, 30, 90, 0.10);
+
+    position: relative;
+}
+
+
+.artwork-form-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    border-radius:
+        22px 22px 0 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #4b216f,
+            #b58b1d,
+            #4b216f
+        );
+}
+
+
+/* =====================================================
+   FORM GROUP
+   ===================================================== */
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #3f294e;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   INPUTS
+   ===================================================== */
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 1px solid #ddd2e5;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #fcfaff;
+
+    color: #33233d;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #aaa0b0;
+}
+
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 140px;
+
+    line-height: 1.6;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #8b5bb5;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 4px rgba(139, 91, 181, 0.10);
+}
+
+
+.form-group select {
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   TWO COLUMN ROW
+   ===================================================== */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 22px;
+}
+
+
+/* =====================================================
+   PRICE INPUT
+   ===================================================== */
+
+.price-input {
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    border: 1px solid #ddd2e5;
+
+    border-radius: 10px;
+
+    background: #fcfaff;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.price-input:focus-within {
+    border-color: #8b5bb5;
+
+    box-shadow:
+        0 0 0 4px rgba(139, 91, 181, 0.10);
+
+    background: #ffffff;
+}
+
+
+.price-input span {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+
+    color: #b58b1d;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+.price-input input {
+    border: none !important;
+
+    box-shadow: none !important;
+
+    background: transparent !important;
+
+    margin: 0;
+}
+
+
+/* =====================================================
+   UPLOAD AREA
+   ===================================================== */
+
+.upload-area {
+    padding: 35px 25px;
+
+    border: 2px dashed #d7c5e3;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fcf9ff,
+            #ffffff
+        );
+
+    text-align: center;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.upload-area:hover {
+    border-color: #b58b1d;
+
+    background: #fffdf8;
+}
+
+
+.upload-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #542779,
+            #7b3fb0
+        );
+
+    color: #ffffff;
+
+    font-size: 28px;
+
+    box-shadow:
+        0 10px 25px rgba(84, 39, 121, 0.20);
+}
+
+
+.upload-area h3 {
+    margin: 0 0 7px;
+
+    color: #4b216f;
+
+    font-size: 18px;
+}
+
+
+.upload-area p {
+    margin: 0 0 20px;
+
+    color: #8c8193;
+
+    font-size: 14px;
+}
+
+
+/* Hide actual file input */
+
+.upload-area input[type="file"] {
+    display: none;
+}
+
+
+/* =====================================================
+   CHOOSE IMAGE BUTTON
+   ===================================================== */
+
+.choose-image-button {
+    display: inline-block;
+
+    padding: 11px 22px;
+
+    border-radius: 9px;
+
+    background: #542779;
+
+    color: #ffffff !important;
+
+    font-size: 14px !important;
+    font-weight: 700 !important;
+
+    cursor: pointer;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+.choose-image-button:hover {
+    background: #6d3593;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(84, 39, 121, 0.22);
+}
+
+
+/* =====================================================
+   SELECTED FILE
+   ===================================================== */
+
+.selected-file {
+    margin-top: 18px;
+
+    color: #4d7c3f;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   IMAGE PREVIEW
+   ===================================================== */
+
+.preview-section {
+    margin-bottom: 28px;
+}
+
+
+.preview-section h3 {
+    margin: 0 0 12px;
+
+    color: #4b216f;
+
+    font-size: 16px;
+}
+
+
+.preview-wrapper {
+    width: 100%;
+
+    max-height: 420px;
+
+    padding: 8px;
+
+    border: 1px solid #eadff1;
+
+    border-radius: 14px;
+
+    background: #faf7fc;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+}
+
+
+.preview-wrapper img {
+    display: block;
+
+    width: 100%;
+
+    max-height: 400px;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+}
+
+
+/* =====================================================
+   APPROVAL NOTICE
+   ===================================================== */
+
+.approval-notice {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    margin: 30px 0;
+
+    padding: 18px 20px;
+
+    border: 1px solid #ead9a8;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffaf0,
+            #fffdf8
+        );
+}
+
+
+.notice-icon {
+    flex-shrink: 0;
+
+    font-size: 24px;
+}
+
+
+.approval-notice strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #8a6812;
+
+    font-size: 14px;
+}
+
+
+.approval-notice p {
+    margin: 0;
+
+    color: #766a57;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+   ===================================================== */
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 10px;
+}
+
+
+.cancel-button,
+.submit-button {
+    min-width: 145px;
+
+    padding: 13px 22px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+/* Cancel */
+
+.cancel-button {
+    border: 1px solid #d9cde0;
+
+    background: #ffffff;
+
+    color: #66586d;
+}
+
+
+.cancel-button:hover:not(:disabled) {
+    border-color: #9e8ba8;
+
+    background: #f7f2fa;
+
+    transform: translateY(-2px);
+}
+
+
+/* Submit */
+
+.submit-button {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4b216f,
+            #713b98
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 8px 20px rgba(75, 33, 111, 0.22);
+}
+
+
+.submit-button:hover:not(:disabled) {
+    background:
+        linear-gradient(
+            135deg,
+            #5b2784,
+            #8246ad
+        );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(75, 33, 111, 0.28);
+}
+
+
+.submit-button:disabled,
+.cancel-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   LOADING SPINNER
+   ===================================================== */
+
+.spinner {
+    width: 15px;
+    height: 15px;
+
+    border: 2px solid rgba(255, 255, 255, 0.35);
+
+    border-top-color: #ffffff;
+
+    border-radius: 50%;
+
+    animation:
+        spin 0.7s linear infinite;
+}
+
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE - TABLET
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .add-artwork-page {
+        padding: 30px 16px 60px;
+    }
+
+    .add-artwork-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .add-artwork-header h1 {
+        font-size: 30px;
+    }
+
+    .back-button {
+        width: 100%;
+    }
+
+    .artwork-form-card {
+        padding: 28px 22px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+   ===================================================== */
+
+@media (max-width: 480px) {
+
+    .add-artwork-page {
+        padding: 20px 10px 45px;
+    }
+
+    .add-artwork-header h1 {
+        font-size: 26px;
+    }
+
+    .add-artwork-header p {
+        font-size: 14px;
+    }
+
+    .artwork-form-card {
+        padding: 24px 16px;
+
+        border-radius: 16px;
+    }
+
+    .upload-area {
+        padding: 28px 15px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .cancel-button,
+    .submit-button {
+        width: 100%;
+    }
+
+}
