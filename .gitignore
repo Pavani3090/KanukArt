@@ -23,3 +23,9 @@ backend/target/
 
 # Local Spring Boot configuration
 backend/src/main/resources/application-local.properties
+
+# Frontend environment files
+
+frontend/.env
+frontend/.env.production
+frontend/.env.local

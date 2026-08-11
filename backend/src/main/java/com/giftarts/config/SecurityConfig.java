@@ -61,7 +61,7 @@ public class SecurityConfig {
                 ).permitAll()
 
                 // =========================
-                // ARTIST DASHBOARD
+                // ARTIST APIs
                 // =========================
 
                 .requestMatchers(
@@ -96,8 +96,19 @@ public class SecurityConfig {
         CorsConfiguration configuration =
                 new CorsConfiguration();
 
+        String frontendUrl =
+                System.getenv("FRONTEND_URL");
+
+        // Local development fallback
+        if (frontendUrl == null ||
+                frontendUrl.isBlank()) {
+
+            frontendUrl =
+                    "http://localhost:5173";
+        }
+
         configuration.setAllowedOrigins(
-            List.of("http://localhost:5173")
+            List.of(frontendUrl)
         );
 
         configuration.setAllowedMethods(
