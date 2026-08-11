@@ -1,17 +1,25 @@
 # React
+
 frontend/node_modules/
 frontend/dist/
 
 # Spring Boot
+
 backend/target/
 
 # Eclipse
+
 .metadata/
 **/.metadata/
 
 # IDE
+
 .vscode/
 .idea/
 
 # Logs
+
 *.log
+
+# Local Spring Boot configuration
+backend/src/main/resources/application-local.properties
