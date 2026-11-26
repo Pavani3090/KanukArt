@@ -1,3 +1,4 @@
+
 name: KanukArt CI
 
 on:
@@ -10,7 +11,6 @@ on:
       - main
 
 jobs:
-
   frontend:
     name: Build Frontend
     runs-on: ubuntu-latest
@@ -26,7 +26,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
@@ -35,7 +35,6 @@ jobs:
 
       - name: Build React application
         run: npm run build
-
 
   backend:
     name: Build Backend
@@ -57,4 +56,4 @@ jobs:
           cache: maven
 
       - name: Build Spring Boot application
-        run: mvn clean package -DskipTests
+        run: mvn -B clean package -DskipTests
