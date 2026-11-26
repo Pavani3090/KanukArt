@@ -28,4 +28,4 @@ backend/src/main/resources/application-local.properties
 
 frontend/.env
 frontend/.env.production
-frontend/.env.local
+frontend/.env.local*.sql 
